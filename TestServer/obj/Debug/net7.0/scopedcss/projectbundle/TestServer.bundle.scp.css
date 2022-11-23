@@ -1,0 +1,50 @@
+/* _content/TestServer/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-nqmdb1tmzm] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-nqmdb1tmzm] {
+  color: #0077cc;
+}
+
+.btn-primary[b-nqmdb1tmzm] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-nqmdb1tmzm], .nav-pills .show > .nav-link[b-nqmdb1tmzm] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-nqmdb1tmzm] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-nqmdb1tmzm] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-nqmdb1tmzm] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-nqmdb1tmzm] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-nqmdb1tmzm] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
