@@ -6,9 +6,9 @@
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/TestServer.runtimeconfig.json
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/TestServer.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/TestServer.pdb
-/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/HtmlRenderer.dll
-/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/HtmlRenderer.PdfSharp.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/BouncyCastle.Crypto.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Humanizer.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/itextsharp.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.Data.Sqlite.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -17,14 +17,10 @@
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Sqlite.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Mono.TextTemplating.dll
-/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/PdfSharp.Charting.dll
-/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/PdfSharp.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/SQLitePCLRaw.batteries_v2.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/SQLitePCLRaw.core.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/SQLitePCLRaw.provider.e_sqlite3.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/System.CodeDom.dll
-/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/de/PdfSharp.Charting.resources.dll
-/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/de/PdfSharp.resources.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/runtimes/alpine-arm/native/libe_sqlite3.so
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/runtimes/alpine-arm64/native/libe_sqlite3.so
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/runtimes/alpine-x64/native/libe_sqlite3.so

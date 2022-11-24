@@ -8,32 +8,20 @@
     ".NETCoreApp,Version=v7.0": {
       "TestServer/1.0.0": {
         "dependencies": {
-          "HtmlRenderer.PdfSharp": "1.5.0.6",
           "Microsoft.EntityFrameworkCore": "7.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.0",
-          "Microsoft.EntityFrameworkCore.Tools": "7.0.0"
+          "Microsoft.EntityFrameworkCore.Tools": "7.0.0",
+          "iTextSharp": "5.5.13.3"
         },
         "runtime": {
           "TestServer.dll": {}
         }
       },
-      "HtmlRenderer.Core/1.5.0.5": {
+      "BouncyCastle/1.8.9": {
         "runtime": {
-          "lib/net45/HtmlRenderer.dll": {
-            "assemblyVersion": "1.5.0.5",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "HtmlRenderer.PdfSharp/1.5.0.6": {
-        "dependencies": {
-          "HtmlRenderer.Core": "1.5.0.5",
-          "PDFsharp": "1.32.3057"
-        },
-        "runtime": {
-          "lib/net45/HtmlRenderer.PdfSharp.dll": {
-            "assemblyVersion": "1.5.0.6",
-            "fileVersion": "0.0.0.0"
+          "lib/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.8.9.0",
+            "fileVersion": "1.8.20343.1"
           }
         }
       },
@@ -42,6 +30,17 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "iTextSharp/5.5.13.3": {
+        "dependencies": {
+          "BouncyCastle": "1.8.9"
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {
+            "assemblyVersion": "5.5.13.3",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -191,26 +190,6 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
-          }
-        }
-      },
-      "PDFsharp/1.32.3057": {
-        "runtime": {
-          "lib/net20/PdfSharp.Charting.dll": {
-            "assemblyVersion": "1.32.3057.0",
-            "fileVersion": "0.0.0.0"
-          },
-          "lib/net20/PdfSharp.dll": {
-            "assemblyVersion": "1.32.3057.0",
-            "fileVersion": "0.0.0.0"
-          }
-        },
-        "resources": {
-          "lib/net20/de/PdfSharp.Charting.resources.dll": {
-            "locale": "de"
-          },
-          "lib/net20/de/PdfSharp.resources.dll": {
-            "locale": "de"
           }
         }
       },
@@ -385,19 +364,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "HtmlRenderer.Core/1.5.0.5": {
+    "BouncyCastle/1.8.9": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QfZkSOb8HomRkKW3EAjT/VT48x6q+bgK4IBA9gFF+5FVTbvmMEIm42NsXEx/LTBHMssnQTPe94X0Bi8KdUIVQA==",
-      "path": "htmlrenderer.core/1.5.0.5",
-      "hashPath": "htmlrenderer.core.1.5.0.5.nupkg.sha512"
-    },
-    "HtmlRenderer.PdfSharp/1.5.0.6": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uk2lzFa/0zQSk8im2CX8ROXlqy8YAJUG28b5/G8wa0YNdO6+04bEl3iZCaThkcyNWnnIsHCn5hWR3vZjc6JhmA==",
-      "path": "htmlrenderer.pdfsharp/1.5.0.6",
-      "hashPath": "htmlrenderer.pdfsharp.1.5.0.6.nupkg.sha512"
+      "sha512": "sha512-axnBgvdD5n+FnEG6efk/tfKuMFru7R/EoISH9zjh319yb3HD24TEHSAbNN/lTRT2ulOGRxDgOsCjkuk08iwWPg==",
+      "path": "bouncycastle/1.8.9",
+      "hashPath": "bouncycastle.1.8.9.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -405,6 +377,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "iTextSharp/5.5.13.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vtnMhTEJdZFCkLqaQLjD8aqTBIVKHPrSFuSXnxbLEJlvE/j/l88fvG9wtsejXTmhtErMo0lA9T2LdfdfbwplYw==",
+      "path": "itextsharp/5.5.13.3",
+      "hashPath": "itextsharp.5.5.13.3.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite.Core/7.0.0": {
       "type": "package",
@@ -545,13 +524,6 @@
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
-    },
-    "PDFsharp/1.32.3057": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-M8w6e4R+jA1j3ddPCY6jNnb8RG21ZgCr+ENapwaH5NPzNl600f1wOcCPY2hEO+jb0aCGjcMHrWk/K+PC1cw0PQ==",
-      "path": "pdfsharp/1.32.3057",
-      "hashPath": "pdfsharp.1.32.3057.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.2": {
       "type": "package",
