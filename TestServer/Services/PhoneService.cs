@@ -3,8 +3,8 @@
 public class PhoneService: IPhoneService
 {
 
-    private readonly IPhoneRepository _repository;
-	public PhoneService(IPhoneRepository repository)
+    private readonly IBaseEditableRepository<Phone> _repository;
+	public PhoneService(IBaseEditableRepository<Phone> repository)
 	{
         _repository = repository;
 	}

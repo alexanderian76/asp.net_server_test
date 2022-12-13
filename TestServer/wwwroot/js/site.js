@@ -17,6 +17,7 @@ function getTestPdf() {
         const reader = res.body.getReader()
         function readStream({ done, value }) {
             if (done) {
+                console.log(data)
                 saveByteArray("name.pdf", data)
                 return;
             }

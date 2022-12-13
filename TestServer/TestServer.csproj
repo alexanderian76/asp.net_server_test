@@ -23,6 +23,8 @@
     <None Remove="System.Drawing.Common" />
     <None Remove="HtmlRenderer.PdfSharp" />
     <None Remove="iTextSharp" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Models\Authorize\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
@@ -32,6 +34,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ConfigurationServices\" />
@@ -40,5 +43,6 @@
     <Folder Include="Repositories\" />
     <Folder Include="Enum\" />
     <Folder Include="Response\" />
+    <Folder Include="Models\Authorize\" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,21 @@ using Microsoft.EntityFrameworkCore;
 using iTextSharp.text.pdf;
 using iTextSharp;
 using iTextSharp.text;
+using System.Net.WebSockets;
+using Org.BouncyCastle.Asn1.Ocsp;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System;
+using System.Net.Sockets;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static iTextSharp.text.pdf.AcroFields;
+using System.Linq;
+using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace TestServer.Controllers;
 
@@ -12,12 +27,15 @@ public class HomeController : Controller
 {
 	private readonly ILogger<HomeController> _logger;
 	private readonly IPhoneService _service;
+    private readonly IChatService _chatService;
 
-	public HomeController(ILogger<HomeController> logger, IPhoneService service)
+    public HomeController(ILogger<HomeController> logger, IPhoneService service, IChatService chatService)
 	{
 		_logger = logger;
 		_service = service;
-	}
+        _chatService = chatService;
+
+    }
 
 	public IActionResult Index()
 	{
@@ -29,7 +47,17 @@ public class HomeController : Controller
 		return View();
 	}
 
-	public async Task<IActionResult> GetPdfFromHtml()
+
+
+    [Route("/ws")]
+    public async Task GetSocket(string login)
+    {
+        await _chatService.WebSocketRequest(login, HttpContext);
+    }
+
+    
+
+    public async Task<IActionResult> GetPdfFromHtml()
 	{
         Byte[] bytes;
 
@@ -50,7 +78,13 @@ public class HomeController : Controller
                     doc.Open();
 
                     //Our sample HTML and CSS
-                    var example_html = @"<p>This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">some</span> <strong>sample <em> text</em></strong><span style=""color: red;"">!!!</span></p>";
+                    var example_html = @"<p>
+This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">some</span> <strong>sample <em> text</em></strong><span style=""color: red;"">!!!</span>
+<table style=""border: 1px;"">
+	<tr style=""border: 1px;""><th>1 column</th><th>2 column</th><th>3 column</th></tr>
+	<tr style=""border: 1px;""><td>1</td><td>2</td><td>3</td></tr>
+</table>
+</p>";
                     var example_css = @".headline{font-size:200%}";
 
                     /**************************************************
@@ -75,7 +109,6 @@ public class HomeController : Controller
                     doc.Close();
                 }
             }
-
             //After all of the PDF "stuff" above is done and closed but **before** we
             //close the MemoryStream, grab all of the active bytes from the stream
             bytes = ms.ToArray();
@@ -86,13 +119,43 @@ public class HomeController : Controller
 		//You could also write the bytes to a database in a varbinary() column (but please don't) or you
 		//could pass them to another function for further PDF processing.
 		var testFile = "text.pdf";
-			//Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.pdf");
-        System.IO.File.WriteAllBytes(testFile, bytes);
-		var file = System.IO.File.Open(testFile, FileMode.Open);
-		return Ok(file) ;
+        //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "test.pdf");
+        //System.IO.File.WriteAllBytes(testFile, bytes);
+        //var file = System.IO.File.Open(testFile, FileMode.Open);
+		var stream = new MemoryStream(bytes);
+
+        return Ok(stream);
     }
 
-	public async Task<IActionResult> Get()
+
+    [Authorize]
+    [Route("/users")]
+    [HttpGet]
+    public async Task<IActionResult> GetUsersOnline()
+    {
+        var data = await _chatService.GetUsers();
+        return Ok(data.Data);
+    }
+
+    [Route("login")]
+    [HttpGet]
+    public async Task<IActionResult> Login(string userName)
+    {
+        var claims = new List<Claim> { new Claim(ClaimTypes.Name, userName) };
+        // создаем JWT-токен
+        var jwt = new JwtSecurityToken(
+                issuer: AuthOptions.ISSUER,
+        audience: AuthOptions.AUDIENCE,
+        claims: claims,
+                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+                signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+
+        return Ok(new JwtSecurityTokenHandler().WriteToken(jwt));
+    }
+    
+
+
+    public async Task<IActionResult> Get()
 	{
 		var str = "";
 		using (MobileContext db = new MobileContext())

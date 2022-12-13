@@ -2,7 +2,7 @@
 using System.Runtime.ConstrainedExecution;
 using Microsoft.EntityFrameworkCore;
 
-public class PhoneRepository: IPhoneRepository
+public class PhoneRepository: IBaseEditableRepository<Phone>
 {
     private readonly MobileContext _db;
 	public PhoneRepository(MobileContext db)
@@ -23,7 +23,7 @@ public class PhoneRepository: IPhoneRepository
 }
 
 
-public interface IPhoneRepository : IBaseRepository<Phone>
+public interface IPhoneRepository : IBaseEditableRepository<Phone>
 {
     new Task<Phone> Get(int id);
     new Task Create(Phone phone);

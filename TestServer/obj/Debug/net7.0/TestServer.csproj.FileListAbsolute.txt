@@ -67,3 +67,10 @@
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/obj/Debug/net7.0/TestServer.pdb
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/obj/Debug/net7.0/TestServer.genruntimeconfig.cache
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/obj/Debug/net7.0/ref/TestServer.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll

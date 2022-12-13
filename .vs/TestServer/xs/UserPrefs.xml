@@ -1,0 +1,78 @@
+﻿<Properties StartupConfiguration="{BFBD805A-D6C2-43F3-880F-858457005896}|http">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Services/PhoneService.cs">
+    <Files>
+      <File FileName="TestServer/Program.cs" />
+      <File FileName="TestServer/Controllers/HomeController.cs" />
+      <File FileName="TestServer/Views/Home/Index.cshtml" />
+      <File FileName="TestServer/Views/Home/Privacy.cshtml" />
+      <File FileName="TestServer/wwwroot/js/site.js" />
+      <File FileName="TestServer/appsettings.json" />
+      <File FileName="TestServer/Models/ErrorViewModel.cs" />
+      <File FileName="TestServer/Views/_ViewStart.cshtml" />
+      <File FileName="TestServer/Views/_ViewImports.cshtml" />
+      <File FileName="TestServer/Properties/launchSettings.json" />
+      <File FileName="TestServer/Views/Shared/Error.cshtml" />
+      <File FileName="TestServer/Models/Company.cs" />
+      <File FileName="TestServer/Models/Phone.cs" />
+      <File FileName="TestServer/.DS_Store" />
+      <File FileName="TestServer/Views/Shared/_Layout.cshtml" />
+      <File FileName="TestServer/Views/Shared/_ValidationScriptsPartial.cshtml" />
+      <File FileName="TestServer/wwwroot/css/site.css" />
+      <File FileName="TestServer/ConfigurationServices/Configuration.cs" />
+      <File FileName="TestServer/Services/Interfaces/IPhoneService.cs" />
+      <File FileName="TestServer/Services/PhoneService.cs" Line="9" Column="34" />
+      <File FileName="TestServer/Repositories/IBaseRepository.cs" />
+      <File FileName="TestServer/Repositories/PhoneRepository.cs" />
+      <File FileName="TestServer/Response/BaseResponse.cs" />
+      <File FileName="TestServer/Db.cs" />
+      <File FileName="TestServer/Views/Shared/_Layout.cshtml.css" />
+      <File FileName="TestServer/Enum/StatusCode.cs" />
+      <File FileName="TestServer/Models/User.cs" />
+      <File FileName="TestServer/Services/Interfaces/IChatService.cs" />
+      <File FileName="TestServer/Services/ChatService.cs" />
+      <File FileName="TestServer/Models/Authorize/AuthOptions.cs" />
+      <File FileName="TestServer/Repositories/IBaseEditableRepository.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TestServer" expanded="True">
+            <Node name="TestServer" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="ConfigurationServices" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Authorize" expanded="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+              <Node name="Repositories" expanded="True" />
+              <Node name="Response" expanded="True" />
+              <Node name="Services" expanded="True">
+                <Node name="Interfaces" expanded="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+                <Node name="Shared" expanded="True">
+                  <Node name="_Layout.cshtml" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="js" expanded="True" />
+                <Node name="lib" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
