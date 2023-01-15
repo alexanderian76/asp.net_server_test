@@ -12,20 +12,21 @@ public class ChatService : IChatService
     private static readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim();
 
     private static List<User> Users = new List<User>();
-
+    private static int lastId = 0;
 
     public async Task WebSocketRequest(string login, HttpContext context)
     {
         if (context.WebSockets.IsWebSocketRequest)
         {
-            Console.WriteLine(context.Request.ToString());
-            Console.WriteLine(login);
+           // Console.WriteLine(context.Request.ToString());
+            Console.WriteLine("First enter " + login);
             var connections = new List<WebSocket>();
             var user = new User();
             var webSocket = await context.WebSockets.AcceptWebSocketAsync();
             user.Login = login;
-            user.Id = Users.Count() + 1;
+            user.Id = lastId;
             user.Connection = webSocket;
+            
             // Добавляем нового пользователя ко всем остальным 
             // connections.Append(await HttpContext.WebSockets.AcceptWebSocketAsync());
 
@@ -61,11 +62,16 @@ public class ChatService : IChatService
             try
             {
                 Users.Add(user);
+                lastId++;
             }
             finally
             {
                 Locker.ExitWriteLock();
             }
+        }
+        else
+        {
+            Users.Where(item => item.Login == user.Login).First().Connection = user.Connection;
         }
         /* Locker.EnterWriteLock();
          try
@@ -76,7 +82,7 @@ public class ChatService : IChatService
          {
              Locker.ExitWriteLock();
          }*/
-        Console.WriteLine(Users.Count());
+        Console.WriteLine("Count: " + Users.Count());
         // Слушаем его
         while (true)
         {
@@ -100,7 +106,8 @@ public class ChatService : IChatService
                     }
                     else
                     {
-                        Console.WriteLine("Close");
+                        await client.Connection.CloseAsync(WebSocketCloseStatus.Empty, "", CancellationToken.None);
+                        Console.WriteLine("Close " + client.Login);
                         Console.WriteLine(client.Connection.State);
                         Locker.EnterWriteLock();
                         try
@@ -110,7 +117,7 @@ public class ChatService : IChatService
                             i--;
                             foreach(var u in Users)
                             {
-                                Console.WriteLine(u.Login);
+                              //  Console.WriteLine(u.Login);
                             }
 
                         }
@@ -129,6 +136,7 @@ public class ChatService : IChatService
                         Users.RemoveAt(i);
 
                         i--;
+                        
                     }
                     finally
                     {
