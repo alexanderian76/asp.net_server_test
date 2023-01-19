@@ -1,18 +1,14 @@
 ﻿<Properties StartupConfiguration="{BFBD805A-D6C2-43F3-880F-858457005896}|http">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Services/ChatService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/ConfigurationServices/Configuration.cs">
     <Files>
       <File FileName="TestServer/Program.cs" />
-      <File FileName="TestServer/Controllers/HomeController.cs" Line="136" Column="34" />
+      <File FileName="TestServer/Controllers/HomeController.cs" />
       <File FileName="TestServer/Views/Home/Index.cshtml" />
       <File FileName="TestServer/Views/Home/Privacy.cshtml" />
-      <File FileName="TestServer/wwwroot/js/site.js" Line="36" Column="32" />
+      <File FileName="TestServer/wwwroot/js/site.js" />
       <File FileName="TestServer/appsettings.json" />
       <File FileName="TestServer/Models/ErrorViewModel.cs" />
       <File FileName="TestServer/Views/_ViewStart.cshtml" />
@@ -25,20 +21,20 @@
       <File FileName="TestServer/Views/Shared/_Layout.cshtml" />
       <File FileName="TestServer/Views/Shared/_ValidationScriptsPartial.cshtml" />
       <File FileName="TestServer/wwwroot/css/site.css" />
-      <File FileName="TestServer/ConfigurationServices/Configuration.cs" />
-      <File FileName="TestServer/Services/Interfaces/IPhoneService.cs" />
-      <File FileName="TestServer/Services/PhoneService.cs" Line="1" Column="1" />
-      <File FileName="TestServer/Repositories/IBaseRepository.cs" />
-      <File FileName="TestServer/Repositories/PhoneRepository.cs" />
-      <File FileName="TestServer/Response/BaseResponse.cs" />
+      <File FileName="TestServer/ConfigurationServices/Configuration.cs" Line="14" Column="45" />
+      <File FileName="TestServer/Services/Interfaces/IPhoneService.cs" Line="10" Column="1" />
+      <File FileName="TestServer/Services/PhoneService.cs" Line="10" Column="3" />
+      <File FileName="TestServer/Repositories/IBaseRepository.cs" Line="1" Column="1" />
+      <File FileName="TestServer/Repositories/PhoneRepository.cs" Line="23" Column="2" />
+      <File FileName="TestServer/Response/BaseResponse.cs" Line="4" Column="2" />
       <File FileName="TestServer/Db.cs" />
       <File FileName="TestServer/Views/Shared/_Layout.cshtml.css" />
       <File FileName="TestServer/Enum/StatusCode.cs" />
       <File FileName="TestServer/Models/User.cs" />
-      <File FileName="TestServer/Services/Interfaces/IChatService.cs" Line="1" Column="1" />
-      <File FileName="TestServer/Services/ChatService.cs" Line="74" Column="96" />
+      <File FileName="TestServer/Services/Interfaces/IChatService.cs" Line="7" Column="2" />
+      <File FileName="TestServer/Services/ChatService.cs" Line="37" Column="13" />
       <File FileName="TestServer/Models/Authorize/AuthOptions.cs" />
-      <File FileName="TestServer/Repositories/IBaseEditableRepository.cs" />
+      <File FileName="TestServer/Repositories/IBaseEditableRepository.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -75,4 +71,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

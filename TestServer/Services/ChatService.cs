@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.WebSockets;
+using System.Text;
+using System.Text.Json;
 
 public class ChatService : IChatService
 {
@@ -42,11 +44,28 @@ public class ChatService : IChatService
     public async Task<IBaseResponse<List<User>>> GetUsers()
     {
         var baseResponse = new BaseResponse<List<User>>();
+
+
+        foreach (var u in Users)
+        {
+            if (u.Connection.State != WebSocketState.Open)
+            {
+                Users = Users.Where(us => us.Login != u.Login).ToList<User>();
+            }
+        }
+
         baseResponse.Description = "Get users";
         baseResponse.StatusCode = StatusCode.OK;
 
         baseResponse.Data = Users;
         return baseResponse;
+    }
+
+    //Dictionary<String, Object> 
+    public static Dictionary<String, Object> Parse(byte[] json)
+    {
+        string jsonStr = Encoding.UTF8.GetString(json);
+        return JsonSerializer.Deserialize<Dictionary<String, Object>>(jsonStr);
     }
 
 
@@ -73,6 +92,8 @@ public class ChatService : IChatService
         {
             Users.Where(item => item.Login == user.Login).First().Connection = user.Connection;
         }
+        
+        
         /* Locker.EnterWriteLock();
          try
          {
@@ -91,56 +112,61 @@ public class ChatService : IChatService
             // Ожидаем данные от него
             var result = await socket.ReceiveAsync(buffer, CancellationToken.None);
 
-
-            //Передаём сообщение всем клиентам
-            for (int i = 0; i < Users.Count(); i++)
+            Console.WriteLine("JSON: " + Parse(buffer.Slice(0, result.Count).ToArray())["id"]);
+            if (Parse(buffer.Slice(0, result.Count).ToArray()).Count > 0 && Parse(buffer.Slice(0, result.Count).ToArray()).ContainsKey("id"))
             {
-
-                User client = Users[i];
-
-                try
+                //Передаём сообщение всем клиентам
+                for (int i = 0; i < Users.Count(); i++)
                 {
-                    if (client.Connection.State == WebSocketState.Open)
+
+                    User client = Users[i];
+                    if (Parse(buffer.Slice(0, result.Count).ToArray())["id"].ToString().Contains(Users[i].Login) && user.Login != Users[i].Login)
                     {
-                        await client.Connection.SendAsync(buffer.Slice(0, result.Count), WebSocketMessageType.Binary, true, CancellationToken.None);
-                    }
-                    else
-                    {
-                        await client.Connection.CloseAsync(WebSocketCloseStatus.Empty, "", CancellationToken.None);
-                        Console.WriteLine("Close " + client.Login);
-                        Console.WriteLine(client.Connection.State);
-                        Locker.EnterWriteLock();
                         try
                         {
-
-                            Users.RemoveAt(i);
-                            i--;
-                            foreach(var u in Users)
+                            if (client.Connection.State == WebSocketState.Open)
                             {
-                              //  Console.WriteLine(u.Login);
+                                await client.Connection.SendAsync(buffer.Slice(0, result.Count), WebSocketMessageType.Binary, true, CancellationToken.None);
                             }
+                            else
+                            {
+                                await client.Connection.CloseAsync(WebSocketCloseStatus.Empty, "", CancellationToken.None);
+                                Console.WriteLine("Close " + client.Login);
+                                Console.WriteLine(client.Connection.State);
+                                Locker.EnterWriteLock();
+                                try
+                                {
 
+                                    Users.RemoveAt(i);
+                                    i--;
+                                    foreach (var u in Users)
+                                    {
+                                        //  Console.WriteLine(u.Login);
+                                    }
+
+                                }
+                                finally
+                                {
+                                    Locker.ExitWriteLock();
+                                }
+                            }
                         }
-                        finally
+
+                        catch (ObjectDisposedException)
                         {
-                            Locker.ExitWriteLock();
+                            Locker.EnterWriteLock();
+                            try
+                            {
+                                Users.RemoveAt(i);
+
+                                i--;
+
+                            }
+                            finally
+                            {
+                                Locker.ExitWriteLock();
+                            }
                         }
-                    }
-                }
-
-                catch (ObjectDisposedException)
-                {
-                    Locker.EnterWriteLock();
-                    try
-                    {
-                        Users.RemoveAt(i);
-
-                        i--;
-                        
-                    }
-                    finally
-                    {
-                        Locker.ExitWriteLock();
                     }
                 }
             }
