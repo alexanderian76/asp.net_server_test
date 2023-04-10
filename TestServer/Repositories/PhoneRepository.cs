@@ -13,6 +13,7 @@ public class PhoneRepository: IBaseEditableRepository<Phone>
     public async Task Create(Phone obj)
     {
         await _db.Phones.AddAsync(obj);
+        
         await _db.SaveChangesAsync();
     }
 

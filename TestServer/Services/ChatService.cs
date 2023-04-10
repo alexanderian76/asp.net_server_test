@@ -88,7 +88,7 @@ public class ChatService : IChatService
                 Locker.ExitWriteLock();
             }
         }
-        else
+        else if(user != null)
         {
             Users.Where(item => item.Login == user.Login).First().Connection = user.Connection;
         }
