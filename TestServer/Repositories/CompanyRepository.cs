@@ -19,7 +19,7 @@ public class CompanyRepository: IBaseEditableRepository<Company>
 
     public async Task<Company> Get(int id)
     {
-        return await _db.Companies.FirstAsync(x => x.Id == id);
+        return await _db.Companies.Select(x => new Company() { Id = x.Id, Name = x.Name, Phones = x.Phones }).FirstAsync(x => x.Id == id);
     }
 }
 

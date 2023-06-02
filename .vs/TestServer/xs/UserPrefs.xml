@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{BFBD805A-D6C2-43F3-880F-858457005896}|http">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Services/ChatService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Controllers/HomeController.cs">
     <Files>
       <File FileName="TestServer/Program.cs" />
-      <File FileName="TestServer/Controllers/HomeController.cs" />
+      <File FileName="TestServer/Controllers/HomeController.cs" Line="72" Column="45" />
       <File FileName="TestServer/Views/Home/Index.cshtml" />
       <File FileName="TestServer/Views/Home/Privacy.cshtml" />
       <File FileName="TestServer/wwwroot/js/site.js" />
@@ -22,20 +21,23 @@
       <File FileName="TestServer/Views/Shared/_Layout.cshtml" />
       <File FileName="TestServer/Views/Shared/_ValidationScriptsPartial.cshtml" />
       <File FileName="TestServer/wwwroot/css/site.css" />
-      <File FileName="TestServer/ConfigurationServices/Configuration.cs" />
+      <File FileName="TestServer/ConfigurationServices/Configuration.cs" Line="19" Column="63" />
       <File FileName="TestServer/Services/Interfaces/IPhoneService.cs" />
       <File FileName="TestServer/Services/PhoneService.cs" />
       <File FileName="TestServer/Repositories/IBaseRepository.cs" />
-      <File FileName="TestServer/Repositories/PhoneRepository.cs" />
+      <File FileName="TestServer/Repositories/PhoneRepository.cs" Line="24" Column="22" />
       <File FileName="TestServer/Response/BaseResponse.cs" />
       <File FileName="TestServer/Db.cs" />
       <File FileName="TestServer/Views/Shared/_Layout.cshtml.css" />
       <File FileName="TestServer/Enum/StatusCode.cs" />
       <File FileName="TestServer/Models/User.cs" />
       <File FileName="TestServer/Services/Interfaces/IChatService.cs" />
-      <File FileName="TestServer/Services/ChatService.cs" Line="136" Column="57" />
+      <File FileName="TestServer/Services/ChatService.cs" />
       <File FileName="TestServer/Models/Authorize/AuthOptions.cs" />
       <File FileName="TestServer/Repositories/IBaseEditableRepository.cs" />
+      <File FileName="TestServer/Services/Interfaces/ICompanyService.cs" />
+      <File FileName="TestServer/Services/CompanyService.cs" Line="25" Column="12" />
+      <File FileName="TestServer/Repositories/CompanyRepository.cs" Line="20" Column="43" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -75,4 +77,5 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
 </Properties>

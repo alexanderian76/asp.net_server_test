@@ -27,13 +27,15 @@ public class HomeController : Controller
 {
 	private readonly ILogger<HomeController> _logger;
 	private readonly IPhoneService _service;
+    private readonly ICompanyService _serviceCompany;
     private readonly IChatService _chatService;
 
-    public HomeController(ILogger<HomeController> logger, IPhoneService service, IChatService chatService)
+    public HomeController(ILogger<HomeController> logger, IPhoneService service, IChatService chatService, ICompanyService companyService)
 	{
 		_logger = logger;
 		_service = service;
         _chatService = chatService;
+        _serviceCompany = companyService;
 
     }
 
