@@ -22,17 +22,27 @@ public class ChatService : IChatService
         {
            // Console.WriteLine(context.Request.ToString());
             Console.WriteLine("First enter " + login);
-            var connections = new List<WebSocket>();
-            var user = new User();
-            var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-            user.Login = login;
-            user.Id = lastId;
-            user.Connection = webSocket;
-            
-            // Добавляем нового пользователя ко всем остальным 
-            // connections.Append(await HttpContext.WebSockets.AcceptWebSocketAsync());
+            if (Users.Where(u => u.Login == login).Count() == 0)
+            {
 
-            await WebSocketRequest(webSocket, user);
+
+                var connections = new List<WebSocket>();
+                var user = new User();
+                var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                user.Login = login;
+                user.Id = lastId;
+                user.Connection = webSocket;
+
+                // Добавляем нового пользователя ко всем остальным 
+                // connections.Append(await HttpContext.WebSockets.AcceptWebSocketAsync());
+
+                await WebSocketRequest(webSocket, user);
+            }
+            else
+            {
+                Console.WriteLine("User exists");
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            }
         }
         else
         {
@@ -107,7 +117,7 @@ public class ChatService : IChatService
         // Слушаем его
         while (true)
         {
-            var buffer = new ArraySegment<byte>(new byte[1024]);
+            var buffer = new ArraySegment<byte>(new byte[4096]);
 
             // Ожидаем данные от него
             var result = await socket.ReceiveAsync(buffer, CancellationToken.None);

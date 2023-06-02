@@ -4,9 +4,11 @@ public class PhoneService: IPhoneService
 {
 
     private readonly IBaseEditableRepository<Phone> _repository;
-	public PhoneService(IBaseEditableRepository<Phone> repository)
+    private readonly IBaseEditableRepository<Company> _repositoryCompany;
+    public PhoneService(IBaseEditableRepository<Phone> repository, IBaseEditableRepository<Company> repositoryCompany)
 	{
         _repository = repository;
+        _repositoryCompany = repositoryCompany;
 	}
 
     public async Task<IBaseResponse<Phone>> Create(Phone phone)
@@ -27,6 +29,7 @@ public class PhoneService: IPhoneService
             baseResponse.Description = "Hello";
             baseResponse.StatusCode = StatusCode.OK;
             baseResponse.Data = await _repository.Get(id);
+            //baseResponse.Data.Company = await _repositoryCompany.Get(baseResponse.Data.CompanyId);
             return baseResponse;
         }
         catch(Exception)

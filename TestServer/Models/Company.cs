@@ -8,6 +8,7 @@ public class Company
     [Column("MyName")]
     public string Name { get; set; }
 
+    
     public List<Phone>? Phones { get; set; }
 
     public override string ToString()

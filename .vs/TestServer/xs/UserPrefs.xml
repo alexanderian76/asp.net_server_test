@@ -1,9 +1,12 @@
 ﻿<Properties StartupConfiguration="{BFBD805A-D6C2-43F3-880F-858457005896}|http">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Services/ChatService.cs">
     <Files>
-      <File FileName="TestServer/Program.cs" Line="17" Column="1" />
-      <File FileName="TestServer/Controllers/HomeController.cs" Line="24" Column="34" />
+      <File FileName="TestServer/Program.cs" />
+      <File FileName="TestServer/Controllers/HomeController.cs" />
       <File FileName="TestServer/Views/Home/Index.cshtml" />
       <File FileName="TestServer/Views/Home/Privacy.cshtml" />
       <File FileName="TestServer/wwwroot/js/site.js" />
@@ -19,18 +22,18 @@
       <File FileName="TestServer/Views/Shared/_Layout.cshtml" />
       <File FileName="TestServer/Views/Shared/_ValidationScriptsPartial.cshtml" />
       <File FileName="TestServer/wwwroot/css/site.css" />
-      <File FileName="TestServer/ConfigurationServices/Configuration.cs" Line="8" Column="29" />
+      <File FileName="TestServer/ConfigurationServices/Configuration.cs" />
       <File FileName="TestServer/Services/Interfaces/IPhoneService.cs" />
-      <File FileName="TestServer/Services/PhoneService.cs" Line="1" Column="1" />
+      <File FileName="TestServer/Services/PhoneService.cs" />
       <File FileName="TestServer/Repositories/IBaseRepository.cs" />
       <File FileName="TestServer/Repositories/PhoneRepository.cs" />
-      <File FileName="TestServer/Response/BaseResponse.cs" Line="1" Column="1" />
-      <File FileName="TestServer/Db.cs" Line="18" Column="2" />
+      <File FileName="TestServer/Response/BaseResponse.cs" />
+      <File FileName="TestServer/Db.cs" />
       <File FileName="TestServer/Views/Shared/_Layout.cshtml.css" />
       <File FileName="TestServer/Enum/StatusCode.cs" />
       <File FileName="TestServer/Models/User.cs" />
       <File FileName="TestServer/Services/Interfaces/IChatService.cs" />
-      <File FileName="TestServer/Services/ChatService.cs" />
+      <File FileName="TestServer/Services/ChatService.cs" Line="136" Column="57" />
       <File FileName="TestServer/Models/Authorize/AuthOptions.cs" />
       <File FileName="TestServer/Repositories/IBaseEditableRepository.cs" />
     </Files>
@@ -63,7 +66,6 @@
                 <Node name="js" expanded="True" />
                 <Node name="lib" expanded="True" />
               </Node>
-              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -73,7 +75,4 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
 </Properties>

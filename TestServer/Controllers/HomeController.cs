@@ -128,12 +128,17 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
     }
 
 
-    [Authorize]
+    //[Authorize]
     [Route("/users")]
     [HttpGet]
     public async Task<IActionResult> GetUsersOnline()
     {
         var data = await _chatService.GetUsers();
+        foreach(var u in data.Data)
+        {
+            Console.WriteLine(u.Login);
+        }
+        
         return Ok(data.Data);
     }
 
@@ -142,6 +147,11 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
     public async Task<IActionResult> Login(string userName)
     {
         var claims = new List<Claim> { new Claim(ClaimTypes.Name, userName) };
+        var data = await _chatService.GetUsers();
+        if(data.Data.Where(u => u.Login == userName).Count() > 0)
+        {
+           // return new BadRequestObjectResult("User exists");
+        }
         // создаем JWT-токен
         var jwt = new JwtSecurityToken(
                 issuer: AuthOptions.ISSUER,
@@ -170,6 +180,7 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
 	public async Task<IActionResult> GetPhoneById(int id)
 	{
 		var response = await _service.GetById(id);
+       //response.Data.Company = await _service.GetById
 		return Ok(response);
 		
 	}

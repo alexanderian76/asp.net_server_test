@@ -19,7 +19,9 @@ public class PhoneRepository: IBaseEditableRepository<Phone>
 
     public async Task<Phone> Get(int id)
     {
-        return await _db.Phones.FirstAsync(x => x.Id == id);
+        var phone = await _db.Phones.FirstAsync(x => x.Id == id);
+        phone.Company = await _db.Companies.Select(x =>  new Company() { Id = x.Id, Name = x.Name}).FirstAsync(x => x.Id == phone.CompanyId);
+        return phone;
     }
 }
 

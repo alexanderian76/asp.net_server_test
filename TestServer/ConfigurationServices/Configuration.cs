@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 public class Configuration
@@ -10,9 +13,17 @@ public class Configuration
 		services.AddControllers();
 		services.AddSingleton<IChatService, ChatService>();
         services.AddScoped<IBaseEditableRepository<Phone>, PhoneRepository>();
+        services.AddScoped<IBaseEditableRepository<Company>, CompanyRepository>();
         //services.AddScoped<IBaseRepository<Phone>>(x => x.GetService<PhoneRepository>());
         services.AddScoped<IPhoneService, PhoneService>();
-		services.AddAuthentication("Bearer")
+       /* services.AddMvc().AddJsonOptions(options => {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            
+           
+            });*/
+
+
+        services.AddAuthentication("Bearer")
 			.AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
