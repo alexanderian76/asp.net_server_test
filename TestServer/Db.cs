@@ -11,6 +11,17 @@ public class MobileContext : DbContext
     {
         Database.EnsureCreated();
     }
+
+ /*   protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Company>()
+        .HasMany(e => e.Phones)
+        .WithOne(e => e.Company);
+        
+
+         modelBuilder.Entity<Phone>()
+        .HasOne(e => e.Company);
+    }*/
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("Filename=Mobile.db");

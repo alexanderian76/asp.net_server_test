@@ -6,26 +6,28 @@ using Microsoft.IdentityModel.Tokens;
 
 public class Configuration
 {
-	public Configuration(IServiceCollection services)
-	{
-		services.AddDbContext<MobileContext>();
-		services.AddControllersWithViews();
-		services.AddControllers();
-		services.AddSingleton<IChatService, ChatService>();
+    public Configuration(IServiceCollection services)
+    {
+        services.AddDbContext<MobileContext>();
+        services.AddControllersWithViews().AddJsonOptions(options =>
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+);
+        services.AddControllers();
+        services.AddSingleton<IChatService, ChatService>();
         services.AddScoped<IBaseEditableRepository<Phone>, PhoneRepository>();
         services.AddScoped<IBaseEditableRepository<Company>, CompanyRepository>();
         //services.AddScoped<IBaseRepository<Phone>>(x => x.GetService<PhoneRepository>());
         services.AddScoped<IPhoneService, PhoneService>();
         services.AddScoped<ICompanyService, CompanyService>();
-       /* services.AddMvc().AddJsonOptions(options => {
-            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-            
-           
-            });*/
+        /* services.AddMvc().AddJsonOptions(options => {
+             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+
+
+             });*/
 
 
         services.AddAuthentication("Bearer")
-			.AddJwtBearer(options =>
+            .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -39,7 +41,7 @@ public class Configuration
                 };
             });
         services.AddAuthorization();
-	}
+    }
 }
 
 

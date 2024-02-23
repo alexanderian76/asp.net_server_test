@@ -1,11 +1,10 @@
 ﻿<Properties StartupConfiguration="{BFBD805A-D6C2-43F3-880F-858457005896}|http">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Controllers/HomeController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TestServer/Program.cs">
     <Files>
-      <File FileName="TestServer/Program.cs" />
-      <File FileName="TestServer/Controllers/HomeController.cs" Line="72" Column="45" />
+      <File FileName="TestServer/Program.cs" Line="29" Column="1" />
+      <File FileName="TestServer/Controllers/HomeController.cs" />
       <File FileName="TestServer/Views/Home/Index.cshtml" />
       <File FileName="TestServer/Views/Home/Privacy.cshtml" />
       <File FileName="TestServer/wwwroot/js/site.js" />
@@ -13,7 +12,7 @@
       <File FileName="TestServer/Models/ErrorViewModel.cs" />
       <File FileName="TestServer/Views/_ViewStart.cshtml" />
       <File FileName="TestServer/Views/_ViewImports.cshtml" />
-      <File FileName="TestServer/Properties/launchSettings.json" />
+      <File FileName="TestServer/Properties/launchSettings.json" Line="17" Column="8" />
       <File FileName="TestServer/Views/Shared/Error.cshtml" />
       <File FileName="TestServer/Models/Company.cs" />
       <File FileName="TestServer/Models/Phone.cs" />
@@ -21,13 +20,13 @@
       <File FileName="TestServer/Views/Shared/_Layout.cshtml" />
       <File FileName="TestServer/Views/Shared/_ValidationScriptsPartial.cshtml" />
       <File FileName="TestServer/wwwroot/css/site.css" />
-      <File FileName="TestServer/ConfigurationServices/Configuration.cs" Line="19" Column="63" />
+      <File FileName="TestServer/ConfigurationServices/Configuration.cs" Line="29" Column="14" />
       <File FileName="TestServer/Services/Interfaces/IPhoneService.cs" />
       <File FileName="TestServer/Services/PhoneService.cs" />
       <File FileName="TestServer/Repositories/IBaseRepository.cs" />
-      <File FileName="TestServer/Repositories/PhoneRepository.cs" Line="24" Column="22" />
+      <File FileName="TestServer/Repositories/PhoneRepository.cs" />
       <File FileName="TestServer/Response/BaseResponse.cs" />
-      <File FileName="TestServer/Db.cs" />
+      <File FileName="TestServer/Db.cs" Line="14" Column="72" />
       <File FileName="TestServer/Views/Shared/_Layout.cshtml.css" />
       <File FileName="TestServer/Enum/StatusCode.cs" />
       <File FileName="TestServer/Models/User.cs" />
@@ -36,22 +35,18 @@
       <File FileName="TestServer/Models/Authorize/AuthOptions.cs" />
       <File FileName="TestServer/Repositories/IBaseEditableRepository.cs" />
       <File FileName="TestServer/Services/Interfaces/ICompanyService.cs" />
-      <File FileName="TestServer/Services/CompanyService.cs" Line="25" Column="12" />
-      <File FileName="TestServer/Repositories/CompanyRepository.cs" Line="20" Column="43" />
+      <File FileName="TestServer/Services/CompanyService.cs" />
+      <File FileName="TestServer/Repositories/CompanyRepository.cs" />
+      <File FileName="TestServer/appsettings.Development.json" />
+      <File FileName="TestServer/Models/Task.cs" Line="6" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TestServer" expanded="True">
             <Node name="TestServer" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
               <Node name="ConfigurationServices" expanded="True" />
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="Authorize" expanded="True" />
-              </Node>
+              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="Repositories" expanded="True" />
               <Node name="Response" expanded="True" />
@@ -68,14 +63,17 @@
                 <Node name="js" expanded="True" />
                 <Node name="lib" expanded="True" />
               </Node>
+              <Node name="appsettings.json" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.TestServer PreferredExecutionTarget="/Applications/Safari.app" />
 </Properties>

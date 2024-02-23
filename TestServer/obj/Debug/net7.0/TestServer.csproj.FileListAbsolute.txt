@@ -74,3 +74,5 @@
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/bin/Debug/net7.0/runtimes/linux-ppc64le/native/libe_sqlite3.so
+/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/obj/Debug/net7.0/TestServer.sourcelink.json

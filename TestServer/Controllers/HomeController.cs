@@ -52,7 +52,7 @@ public class HomeController : Controller
 
 
     [Route("/ws")]
-    public async Task GetSocket(string login)
+    public async System.Threading.Tasks.Task GetSocket(string login)
     {
         await _chatService.WebSocketRequest(login, HttpContext);
     }
@@ -181,7 +181,7 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
 	[HttpGet]
 	public async Task<IActionResult> GetPhoneById(int id)
 	{
-		var response = await _service.GetById(id);
+		var response = await _serviceCompany.GetById(id);
        //response.Data.Company = await _service.GetById
 		return Ok(response);
 		
@@ -191,7 +191,10 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
 	public async Task<IActionResult> CreateRandomPhone(string title)
 	{
 		var rand = new Random().Next(100);
-		var phone = new Phone() { Company = new Company() { Name = "testComp" + rand.ToString() }, Title = title, Price = rand};
+        
+	    Company company = _serviceCompany.GetById(1).Result.Data;
+        
+		var phone = new Phone() { Company = company == null ? new Company() {Name = "testComp" + title} : company , Title = title, Price = rand};
 
         var response = await _service.Create(phone);
 		return Ok(response);
