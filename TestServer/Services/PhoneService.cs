@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 public class PhoneService: IPhoneService
 {
@@ -24,6 +25,7 @@ public class PhoneService: IPhoneService
     public async Task<IBaseResponse<Phone>> GetById(int id)
     {
         var baseResponse = new BaseResponse<Phone>();
+        Console.WriteLine("GET BY ID");
         try
         {
             baseResponse.Description = "Hello";

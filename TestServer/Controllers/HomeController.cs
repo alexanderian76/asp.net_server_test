@@ -181,7 +181,7 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
 	[HttpGet]
 	public async Task<IActionResult> GetPhoneById(int id)
 	{
-		var response = await _serviceCompany.GetById(id);
+		var response = await _service.GetById(id);
        //response.Data.Company = await _service.GetById
 		return Ok(response);
 		
