@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 
 public class ChatService : IChatService
 {
-
+    public ChatService()
+    {
+        SendAwaitingMessages();
+    }
 
     // Список всех клиентов
     private static readonly List<WebSocket> Clients = new List<WebSocket>();
@@ -14,13 +18,14 @@ public class ChatService : IChatService
     private static readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim();
 
     private static List<User> Users = new List<User>();
+    private static ConcurrentStack<MessageDTO> AwaitingMessages = new ConcurrentStack<MessageDTO>();
     private static int lastId = 0;
 
     public async Task WebSocketRequest(string login, HttpContext context)
     {
         if (context.WebSockets.IsWebSocketRequest)
         {
-           // Console.WriteLine(context.Request.ToString());
+            // Console.WriteLine(context.Request.ToString());
             Console.WriteLine("First enter " + login);
             if (Users.Where(u => u.Login == login).Count() == 0)
             {
@@ -98,12 +103,12 @@ public class ChatService : IChatService
                 Locker.ExitWriteLock();
             }
         }
-        else if(user != null)
+        else if (user != null)
         {
             Users.Where(item => item.Login == user.Login).First().Connection = user.Connection;
         }
-        
-        
+
+
         /* Locker.EnterWriteLock();
          try
          {
@@ -114,6 +119,9 @@ public class ChatService : IChatService
              Locker.ExitWriteLock();
          }*/
         Console.WriteLine("Count: " + Users.Count());
+
+
+
         // Слушаем его
         while (true)
         {
@@ -122,21 +130,92 @@ public class ChatService : IChatService
             // Ожидаем данные от него
             var result = await socket.ReceiveAsync(buffer, CancellationToken.None);
 
-            Console.WriteLine("JSON: " + Parse(buffer.Slice(0, result.Count).ToArray())["id"]);
+            Console.WriteLine("JSON: " + JsonSerializer.Serialize(Parse(buffer.Slice(0, result.Count).ToArray())));
+
             if (Parse(buffer.Slice(0, result.Count).ToArray()).Count > 0 && Parse(buffer.Slice(0, result.Count).ToArray()).ContainsKey("id"))
             {
+                var msg = JsonSerializer.Deserialize<MessageDTO>(JsonSerializer.Serialize(Parse(buffer.Slice(0, result.Count).ToArray())));
+                Console.WriteLine("Message: " + msg.message + "\t id:" + msg.id + "\t data:" + msg.data + "\t sender:" + msg.sender + "\t type:" + msg.type);
+                AwaitingMessages.Push(msg);
                 //Передаём сообщение всем клиентам
+                /*  for (int i = 0; i < Users.Count(); i++)
+                  {
+
+                      User client = Users[i];
+                      if (Parse(buffer.Slice(0, result.Count).ToArray())["id"].ToString().Contains(Users[i].Login) && user.Login != Users[i].Login)
+                      {
+                          try
+                          {
+                              if (client.Connection.State == WebSocketState.Open)
+                              {
+                                  await client.Connection.SendAsync(buffer.Slice(0, result.Count), WebSocketMessageType.Binary, true, CancellationToken.None);
+                              }
+                              else
+                              {
+                                  await client.Connection.CloseAsync(WebSocketCloseStatus.Empty, "", CancellationToken.None);
+                                  Console.WriteLine("Close " + client.Login);
+                                  Console.WriteLine(client.Connection.State);
+                                  Locker.EnterWriteLock();
+                                  try
+                                  {
+
+                                      Users.RemoveAt(i);
+                                      i--;
+                                      foreach (var u in Users)
+                                      {
+                                          //  Console.WriteLine(u.Login);
+                                      }
+
+                                  }
+                                  finally
+                                  {
+                                      Locker.ExitWriteLock();
+                                  }
+                              }
+                          }
+
+                          catch (ObjectDisposedException)
+                          {
+                              Locker.EnterWriteLock();
+                              try
+                              {
+                                  Users.RemoveAt(i);
+
+                                  i--;
+
+                              }
+                              finally
+                              {
+                                  Locker.ExitWriteLock();
+                              }
+                          }
+                      }
+                  }*/
+            }
+
+        }
+    }
+
+    private async Task SendAwaitingMessages()
+    {
+        Console.WriteLine("QWEQWEQWRQWR");
+        Console.WriteLine(JsonSerializer.Serialize(AwaitingMessages));
+        try
+        {
+            foreach (var message in AwaitingMessages)
+            {
                 for (int i = 0; i < Users.Count(); i++)
                 {
 
                     User client = Users[i];
-                    if (Parse(buffer.Slice(0, result.Count).ToArray())["id"].ToString().Contains(Users[i].Login) && user.Login != Users[i].Login)
+                    if (message.id.Contains(Users[i].Login) && message.sender != Users[i].Login)
                     {
                         try
                         {
                             if (client.Connection.State == WebSocketState.Open)
                             {
-                                await client.Connection.SendAsync(buffer.Slice(0, result.Count), WebSocketMessageType.Binary, true, CancellationToken.None);
+                                await client.Connection.SendAsync(JsonSerializer.SerializeToUtf8Bytes(message), WebSocketMessageType.Binary, true, CancellationToken.None);
+                                message.isSent = true;
                             }
                             else
                             {
@@ -161,14 +240,13 @@ public class ChatService : IChatService
                                 }
                             }
                         }
-
                         catch (ObjectDisposedException)
                         {
                             Locker.EnterWriteLock();
                             try
                             {
                                 Users.RemoveAt(i);
-
+                                SendAwaitingMessages();
                                 i--;
 
                             }
@@ -180,7 +258,14 @@ public class ChatService : IChatService
                     }
                 }
             }
-
+            AwaitingMessages = new ConcurrentStack<MessageDTO>(AwaitingMessages.Where(m => !m.isSent).ToArray());
+            await Task.Delay(3000);
+            SendAwaitingMessages();
+        }
+        catch (Exception e)
+        {
+            await Task.Delay(3000);
+            SendAwaitingMessages();
         }
     }
 
