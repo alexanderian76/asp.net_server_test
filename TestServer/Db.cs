@@ -6,6 +6,7 @@ public class MobileContext : DbContext
 {
     public DbSet<Company> Companies { get; set; }
     public DbSet<Phone> Phones { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public MobileContext()
     {

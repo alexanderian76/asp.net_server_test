@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kQuZSiEVEyY=",
+  "dgSpecHash": "GgXSTyu6rXs=",
   "success": true,
   "projectFilePath": "/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/TestServer.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,13 @@
     "/Users/alexanderian/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.15.1/microsoft.identitymodel.protocols.openidconnect.6.15.1.nupkg.sha512",
     "/Users/alexanderian/.nuget/packages/microsoft.identitymodel.tokens/6.15.1/microsoft.identitymodel.tokens.6.15.1.nupkg.sha512",
     "/Users/alexanderian/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/otp.net/1.4.0/otp.net.1.4.0.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/qrcoder/1.6.0/qrcoder.1.6.0.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/scrutor/4.2.2/scrutor.4.2.2.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/skiasharp/2.88.8/skiasharp.2.88.8.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/skiasharp.nativeassets.linux.nodependencies/2.88.8/skiasharp.nativeassets.linux.nodependencies.2.88.8.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/skiasharp.nativeassets.macos/2.88.8/skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "/Users/alexanderian/.nuget/packages/skiasharp.nativeassets.win32/2.88.8/skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
     "/Users/alexanderian/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.4/sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "/Users/alexanderian/.nuget/packages/sqlitepclraw.core/2.1.4/sqlitepclraw.core.2.1.4.nupkg.sha512",
     "/Users/alexanderian/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.4/sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",

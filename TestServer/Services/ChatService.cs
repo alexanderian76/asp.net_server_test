@@ -21,22 +21,23 @@ public class ChatService : IChatService
     private static ConcurrentStack<MessageDTO> AwaitingMessages = new ConcurrentStack<MessageDTO>();
     private static int lastId = 0;
 
-    public async Task WebSocketRequest(string login, HttpContext context)
+    public async Task WebSocketRequest(User user, HttpContext context)
     {
         if (context.WebSockets.IsWebSocketRequest)
         {
             // Console.WriteLine(context.Request.ToString());
-            Console.WriteLine("First enter " + login);
-            if (Users.Where(u => u.Login == login).Count() == 0)
+            Console.WriteLine("First enter " + user.Login);
+            if (Users.Where(u => u.Login == user.Login).Count() == 0)
             {
 
 
                 var connections = new List<WebSocket>();
-                var user = new User();
                 var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                user.Login = login;
-                user.Id = lastId;
+             //   var user = _dbContext.Users.FirstOrDefault(u => u.Login == login);
                 user.Connection = webSocket;
+                //new User() { Login = login, Connection = webSocket};
+                
+               // user.Id = lastId;
 
                 // Добавляем нового пользователя ко всем остальным 
                 // connections.Append(await HttpContext.WebSockets.AcceptWebSocketAsync());
@@ -137,6 +138,7 @@ public class ChatService : IChatService
                 var msg = JsonSerializer.Deserialize<MessageDTO>(JsonSerializer.Serialize(Parse(buffer.Slice(0, result.Count).ToArray())));
                 Console.WriteLine("Message: " + msg.message + "\t id:" + msg.id + "\t data:" + msg.data + "\t sender:" + msg.sender + "\t type:" + msg.type);
                 AwaitingMessages.Push(msg);
+                SendAwaitingMessages();
                 //Передаём сообщение всем клиентам
                 /*  for (int i = 0; i < Users.Count(); i++)
                   {
@@ -200,6 +202,8 @@ public class ChatService : IChatService
     {
         Console.WriteLine("QWEQWEQWRQWR");
         Console.WriteLine(JsonSerializer.Serialize(AwaitingMessages));
+        if(AwaitingMessages.Count() == 0)
+            return;
         try
         {
             foreach (var message in AwaitingMessages)
