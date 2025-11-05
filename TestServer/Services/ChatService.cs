@@ -8,7 +8,7 @@ public class ChatService : IChatService
 {
     public ChatService()
     {
-        SendAwaitingMessages();
+        _ = SendAwaitingMessages();
     }
 
     // Список всех клиентов
@@ -64,7 +64,7 @@ public class ChatService : IChatService
 
         foreach (var u in Users)
         {
-            if (u.Connection.State != WebSocketState.Open)
+            if (u.Connection?.State != WebSocketState.Open)
             {
                 Users = Users.Where(us => us.Login != u.Login).ToList<User>();
             }
@@ -81,7 +81,7 @@ public class ChatService : IChatService
     public static Dictionary<String, Object> Parse(byte[] json)
     {
         string jsonStr = Encoding.UTF8.GetString(json);
-        return JsonSerializer.Deserialize<Dictionary<String, Object>>(jsonStr);
+        return JsonSerializer.Deserialize<Dictionary<String, Object>>(jsonStr) ?? new Dictionary<string, object>();
     }
 
 
@@ -136,9 +136,12 @@ public class ChatService : IChatService
             if (Parse(buffer.Slice(0, result.Count).ToArray()).Count > 0 && Parse(buffer.Slice(0, result.Count).ToArray()).ContainsKey("id"))
             {
                 var msg = JsonSerializer.Deserialize<MessageDTO>(JsonSerializer.Serialize(Parse(buffer.Slice(0, result.Count).ToArray())));
-                Console.WriteLine("Message: " + msg.message + "\t id:" + msg.id + "\t data:" + msg.data + "\t sender:" + msg.sender + "\t type:" + msg.type);
-                AwaitingMessages.Push(msg);
-                SendAwaitingMessages();
+             //   byte[] messageBytes = Encoding.Default.GetBytes(msg.message);
+             //   var messageUtf8 = Encoding.UTF8.GetString(messageBytes);
+                Console.WriteLine("Message: " + msg?.message + "\t id:" + msg?.id + "\t data:" + msg?.data + "\t sender:" + msg?.sender + "\t type:" + msg?.type);
+                if(msg != null)
+                    AwaitingMessages.Push(msg);
+                _ = SendAwaitingMessages();
                 //Передаём сообщение всем клиентам
                 /*  for (int i = 0; i < Users.Count(); i++)
                   {
@@ -212,7 +215,7 @@ public class ChatService : IChatService
                 {
 
                     User client = Users[i];
-                    if (message.id.Contains(Users[i].Login) && message.sender != Users[i].Login)
+                    if (message.id.Contains(Users[i].Login) && message.sender != Users[i].Login && client != null && client.Connection != null)
                     {
                         try
                         {
@@ -250,7 +253,7 @@ public class ChatService : IChatService
                             try
                             {
                                 Users.RemoveAt(i);
-                                SendAwaitingMessages();
+                                _ = SendAwaitingMessages();
                                 i--;
 
                             }
@@ -264,12 +267,12 @@ public class ChatService : IChatService
             }
             AwaitingMessages = new ConcurrentStack<MessageDTO>(AwaitingMessages.Where(m => !m.isSent).ToArray());
             await Task.Delay(3000);
-            SendAwaitingMessages();
+            _ = SendAwaitingMessages();
         }
         catch (Exception e)
         {
             await Task.Delay(3000);
-            SendAwaitingMessages();
+            _ = SendAwaitingMessages();
         }
     }
 

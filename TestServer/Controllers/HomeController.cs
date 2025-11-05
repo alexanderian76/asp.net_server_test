@@ -22,6 +22,7 @@ using System.Security.Claims;
 using System.Text;
 using TestServer.Services.Auth;
 using TestServer.Services;
+using Microsoft.Net.Http.Headers;
 
 namespace TestServer.Controllers;
 
@@ -168,7 +169,7 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
         var user = _dbContext.Users.FirstOrDefault(u => u.Login == userName);
         if (user != null)
         {
-            if (_totpService.Validate(totpCode, user.TotpKey))
+            if (_totpService.Validate(totpCode ?? "", user.TotpKey))
             {
                 var jwt = new JwtSecurityToken(
                                     issuer: AuthOptions.ISSUER,
@@ -195,7 +196,7 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
                                issuer: AuthOptions.ISSUER,
                        audience: AuthOptions.AUDIENCE,
                        claims: claims,
-                               //expires: DateTime.UtcNow.Add(TimeSpan.FromDays(2)),
+                               expires: DateTime.UtcNow.Add(TimeSpan.FromDays(365)),
                                signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
 
@@ -205,16 +206,53 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
                 // return new BadRequestObjectResult("User exists");
             }
             // создаем JWT-токен
-           /* var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-            audience: AuthOptions.AUDIENCE,
-            claims: claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            /* var jwt = new JwtSecurityToken(
+                     issuer: AuthOptions.ISSUER,
+             audience: AuthOptions.AUDIENCE,
+             claims: claims,
+                     expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
-            return Ok(new JwtSecurityTokenHandler().WriteToken(jwt));*/
+             return Ok(new JwtSecurityTokenHandler().WriteToken(jwt));*/
         }
     }
+
+    [Authorize]
+    [Route("refreshToken")]
+    [HttpGet]
+    public async Task<IActionResult> RefreshToken()
+    {
+        string? authorizationHeader = Request.Headers[HeaderNames.Authorization];
+
+        if (string.IsNullOrEmpty(authorizationHeader))
+        {
+            return Unauthorized("Authorization header missing.");
+        }
+
+        // Extract the token (assuming Bearer scheme)
+        // It will be in the format "Bearer <token>"
+        string token = authorizationHeader.Replace("Bearer ", "");
+
+        var handler = new JwtSecurityTokenHandler();
+        var oldToken = handler.ReadJwtToken(token);
+
+        var userIdClaim = oldToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+        if (userIdClaim == null)
+            return BadRequest("No claims");
+        var claims = new List<Claim> { new Claim(ClaimTypes.Name, userIdClaim.Value) };
+
+        var jwt = new JwtSecurityToken(
+                           issuer: AuthOptions.ISSUER,
+                   audience: AuthOptions.AUDIENCE,
+                   claims: claims,
+                           expires: DateTime.UtcNow.Add(TimeSpan.FromDays(365)),
+                           signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+
+
+        return Ok(new JwtSecurityTokenHandler().WriteToken(jwt));
+
+    }
+
 
 
 

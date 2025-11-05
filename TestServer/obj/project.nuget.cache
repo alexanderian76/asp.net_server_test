@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GgXSTyu6rXs=",
+  "dgSpecHash": "9yJXV4M2iEk=",
   "success": true,
   "projectFilePath": "/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/TestServer.csproj",
   "expectedPackageFiles": [
@@ -56,8 +56,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'BouncyCastle 1.8.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
+      "projectPath": "/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/TestServer.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/TestServer.csproj",
       "libraryId": "BouncyCastle",
       "targetGraphs": [
         "net9.0"
@@ -66,8 +68,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'iTextSharp 5.5.13.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
+      "projectPath": "/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/TestServer.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/alexanderian/Desktop/Projects/c#/TestServer/TestServer/TestServer.csproj",
       "libraryId": "iTextSharp",
       "targetGraphs": [
         "net9.0"
