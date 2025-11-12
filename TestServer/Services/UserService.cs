@@ -9,6 +9,9 @@ namespace TestServer.Services
     {
         Task<IBaseResponse<User>> GetByIdAsync(int id);
         Task CreateAsync(User user);
+
+        Task UploadFile(MemoryStream stream, string fileName);
+        Task<byte[]> GetFile(string fileName);
     }
     [DITransient]
     public class UserService(MobileContext _dbContext) : IUserService
@@ -36,6 +39,18 @@ namespace TestServer.Services
                 baseResponse.StatusCode = StatusCode.InternalServerError;
                 return baseResponse;
             }
+        }
+
+        public async Task<byte[]> GetFile(string fileName)
+        {
+            var file = await _dbContext.Files.FirstOrDefaultAsync(x => x.Guid == Guid.Parse(fileName));
+            return file?.Blob ?? [];
+        }
+
+        public async Task UploadFile(MemoryStream stream, string fileName)
+        {
+            await _dbContext.Files.AddAsync(new UploadedFile() { Guid = Guid.Parse(fileName), Blob = stream.ToArray() });
+            await _dbContext.SaveChangesAsync();
         }
     }
 

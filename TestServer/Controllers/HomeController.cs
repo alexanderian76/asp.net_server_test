@@ -254,6 +254,77 @@ This <em>is </em><span class=""headline"" style=""text-decoration: underline;"">
     }
 
 
+    //[Authorize]
+    [Route("/uploadFile")]
+    [HttpPost]
+    public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+    {
+        try
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Файл не выбран или пустой");
+            }
+
+            // Проверка размера файла (например, 50MB)
+            if (file.Length > 50 * 1024 * 1024)
+            {
+                return BadRequest("Размер файла не должен превышать 50MB");
+            }
+
+            // Проверка типа файла
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".mp4", ".mov", ".avi" };
+            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            //   if (!allowedExtensions.Contains(fileExtension))
+            //   {
+            //      return BadRequest($"Недопустимый тип файла. Разрешены: {string.Join(", ", allowedExtensions)}");
+            //  }
+
+            // Создание уникального имени файла
+            var fileName = Guid.NewGuid().ToString();
+
+            // Сохранение файла
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                await _userService.UploadFile(stream, fileName);
+            }
+
+
+
+
+            _logger.LogInformation($"Файл {file.FileName} успешно загружен как {fileName}");
+            return Ok(fileName);
+            return Ok(new
+            {
+                message = "Файл успешно загружен",
+                fileName = fileName,
+                originalName = file.FileName,
+                fileSize = file.Length,
+                contentType = file.ContentType
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Ошибка при загрузке файла");
+            return StatusCode(500, "Произошла ошибка при загрузке файла");
+        }
+    }
+
+
+    [Route("/getFile")]
+    [HttpGet]
+    public async Task<IActionResult> GetFile([FromQuery] string guid)
+    {
+        var contentType = "image/jpeg";
+
+        var file = await _userService.GetFile(guid);
+        Console.WriteLine(file.Length);
+        return File(file, contentType);
+    }
+
+
 
 
     public async Task<IActionResult> Get()
